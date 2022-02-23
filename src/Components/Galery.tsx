@@ -1,14 +1,17 @@
-import data from './rickAndMortyData.json';
+import data from '../rickAndMortyData.json';
 import GaleryItem from "./GaleryItem";
+import "./Galery.css"
+
 
 export default function Galery(){
     const items = data.results
-        .map(e => {return {name: e.name, imageUrl: e.image, status: e.status}})
+        .map(e => ({name: e.name, imageUrl: e.image, status: e.status, species: e.species}))
         .map(e => <GaleryItem key={e.name} character={e} />)
 
     return (
-        <div>
+        <div className={'galeryBox'}>
             {items}
         </div>
     )
 }
+

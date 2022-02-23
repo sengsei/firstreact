@@ -1,0 +1,18 @@
+.item{
+    background-color: darkolivegreen;
+    border: solid hotpink 3px;
+    border-radius: 15px;
+    align-items: center;
+    text-align: center;
+    width: min-content;
+}
+
+.itemPic{
+    border-radius: 50%;
+    border: solid hotpink 3px;
+    height: available;
+}
+
+.itemHeader {
+    background-color: beige;
+}

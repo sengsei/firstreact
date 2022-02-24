@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Galery from "./Components/Galery"
+import Gallery from "./Components/Gallery"
 
 function App() {
   return (
       <div>
-        <Galery />
+        <Gallery />
       </div>
   );
 }

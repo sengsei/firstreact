@@ -1,11 +1,11 @@
 import {Character} from "../model";
 
 
-interface GaleryItemProps{
+interface GalleryItemProps{
     character: Character
 }
 
-function GalleryItem(props: GaleryItemProps){
+function GalleryItem(props: GalleryItemProps){
 
     return (
         <div className={'item'}>

@@ -4,7 +4,7 @@ import {Character, Response as ResponseBody} from "../model";
 import GalleryItem from "./GalleryItem";
 
 
-export default function Galery(){
+export default function Gallery(){
     const [searchName, setSearchName] = useState('');
 
   /*

@@ -5,12 +5,12 @@ interface GaleryItemProps{
     character: Character
 }
 
-function GaleryItem(props: GaleryItemProps){
+function GalleryItem(props: GaleryItemProps){
 
     return (
         <div className={'item'}>
             <h1 className={'itemHeader'}>Name: { props.character.name }</h1>
-            <div><img src={props.character.imageUrl} alt="Pic of Item" className={'itemPic'}/></div>
+            <div><img src={props.character.image} alt="Pic of Item" className={'itemPic'}/></div>
             <div>
                 <ul>
                     <li>Status: { props.character.status }</li>
@@ -22,4 +22,4 @@ function GaleryItem(props: GaleryItemProps){
 
 }
 
-export default GaleryItem
+export default GalleryItem

@@ -26,7 +26,7 @@ export default function Gallery(){
     }, [])
 
     return (
-        <div className={'galeryBox'}>
+        <div className={'galleryBox'}>
             <div className={'inputBox'}>
                 <input type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
             </div>

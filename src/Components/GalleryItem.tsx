@@ -1,5 +1,5 @@
 import {Character} from "../model";
-
+import "./GalleryItem.css"
 
 interface GalleryItemProps{
     character: Character

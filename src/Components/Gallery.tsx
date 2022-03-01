@@ -63,14 +63,14 @@ export default function Gallery(){
            </div>
 
             <div className={'inputBox'}>
-                <input type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
+                <input data-testid={"search-field"} type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
             </div>
             {
                 errorMessage ? <h1>{errorMessage}</h1>
                 :
                 items
                 .filter(character => character.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase()))
-                .map(character => <GalleryItem key={character.name} character={character} />)
+                    .map(character => <div data-testid={"gallery-item"}><GalleryItem key={character.name} character={character} /></div>)
             }
 
 

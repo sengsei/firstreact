@@ -15,27 +15,29 @@ export default function Gallery(){
         .map(e => <GalleryItem key={e.name} character={e} />)
  */
   const [items, setItems] = useState([] as Array<Character>)
-
   const [pages, setPages] = useState('https://rickandmortyapi.com/api/character')
   const[errorMessage, setErrorMessage] = useState('')
 
 
     useEffect(() => {
-        fetch('https://rickandmortyapi.com/api/character1')
+        setErrorMessage('')
+        fetch('https://rickandmortyapi.com/api/character')
             .then(response => {
-                if (response.status !== 200){
-                    throw new Error()
+                if (!response.ok){
+                    throw new Error('URL gibt es nicht')
                 }
                return response.json()
             })
             .then((responseBody: ResponseBody) => responseBody.results)
             .then(filteredCharacters => setItems(filteredCharacters))
-            .catch(e => setErrorMessage("URL gibt es nicht"))
+            .catch((e: Error) => setErrorMessage(e.message))
 
 
     }, [])
 
-    useState(() => {
+
+
+        useState(() => {
       fetch('https://rickandmortyapi.com/api/character')
           .then(response => response.json())
           .then((responseBody: ResponseBody) => responseBody.results)
@@ -55,9 +57,6 @@ export default function Gallery(){
 
     return (
         <div className={'galleryBox'}>
-            <div>
-                {errorMessage}
-            </div>
            <div>
                <button onClick={() => getPages() }>prev</button>
                <button>fwd</button>
@@ -66,7 +65,10 @@ export default function Gallery(){
             <div className={'inputBox'}>
                 <input type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
             </div>
-            {items
+            {
+                errorMessage ? <h1>{errorMessage}</h1>
+                :
+                items
                 .filter(character => character.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase()))
                 .map(character => <GalleryItem key={character.name} character={character} />)
             }

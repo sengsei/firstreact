@@ -30,7 +30,7 @@ export default function Gallery(){
             })
             .then((responseBody: ResponseBody) => responseBody.results)
             .then(filteredCharacters => setItems(filteredCharacters))
-            .catch((e: Error) => setErrorMessage(e.message))
+            .catch(e => setErrorMessage(e.message))
 
 
     }, [])

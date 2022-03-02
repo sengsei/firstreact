@@ -1,6 +1,6 @@
 import "./Gallery.css"
 import {useEffect, useState} from "react";
-import {Character, Response as ResponseBody} from "../model";
+import {Character, Info, ResponseBody} from "../model";
 import GalleryItem from "./GalleryItem";
 
 
@@ -15,8 +15,10 @@ export default function Gallery(){
         .map(e => <GalleryItem key={e.name} character={e} />)
  */
   const [items, setItems] = useState([] as Array<Character>)
-  const [pages, setPages] = useState('https://rickandmortyapi.com/api/character')
   const[errorMessage, setErrorMessage] = useState('')
+  const[info, setInfo] = useState({} as Info)
+
+
 
 
     useEffect(() => {
@@ -45,25 +47,31 @@ export default function Gallery(){
 
     })
 
-    const getPages = () => {
+    const fetchData = (url: string = 'https://rickandmortyapi.com/api/character') => {
+        fetch(url)
+            .then(response => response.json())
+            .then((responseBody: ResponseBody) => {
+                setInfo(responseBody.info);
+                setItems(responseBody.results);
+                setSearchName('');
+            });
+    };
 
-        fetch(`$pages`)
-            .then (response => {
+    useEffect(() => fetchData(), []);
 
-                return response.json();
-            })
-            
-    }
+    const prev = () => fetchData(info.prev);
+    const next = () => fetchData(info.next);
 
     return (
         <div className={'galleryBox'}>
            <div>
-               <button onClick={() => getPages() }>prev</button>
-               <button>fwd</button>
+               { info.prev && <button className={"button is-dark"} onClick={() => prev()}>Zurück</button> }
+               { info.next && <button className={"button is-dark"} onClick={() => next()}>Weiter</button> }
+
            </div>
 
             <div className={'inputBox'}>
-                <input data-testid={"search-field"} type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
+                <input className={"input"} data-testid={"search-field"} type='text' placeholder='search name:' value={searchName}  onChange={ev => setSearchName(ev.target.value)}/>
             </div>
             {
                 errorMessage ? <h1>{errorMessage}</h1>

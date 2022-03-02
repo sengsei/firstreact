@@ -1,5 +1,6 @@
 
 
+
 export interface Character{
     id?: number
     name: string
@@ -11,5 +12,15 @@ export interface Character{
 }
 
 export interface Response{
+    results: Array<Character>
+}
+
+export interface Info {
+    next?: string
+    prev?: string
+}
+
+export interface ResponseBody{
+    info: Info,
     results: Array<Character>
 }

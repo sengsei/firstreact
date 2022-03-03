@@ -17,6 +17,7 @@ export default function Gallery(){
   const [items, setItems] = useState([] as Array<Character>)
   const[errorMessage, setErrorMessage] = useState('')
   const[info, setInfo] = useState({} as Info)
+  const[page, setPage] = useState(localStorage.getItem('currentPage') ?? '1')
 
 
 
@@ -47,7 +48,7 @@ export default function Gallery(){
 
     })
 
-    const fetchData = (url: string = 'https://rickandmortyapi.com/api/character') => {
+    const fetchData = (url: string) => {
         fetch(url)
             .then(response => response.json())
             .then((responseBody: ResponseBody) => {
@@ -57,10 +58,20 @@ export default function Gallery(){
             });
     };
 
-    useEffect(() => fetchData(), []);
+    useEffect(() => {
+        localStorage.setItem('currentPage', page)
+        fetchData(`https://rickandmortyapi.com/api/character?page=${page}`)
+    } , [page]);
 
-    const prev = () => fetchData(info.prev);
-    const next = () => fetchData(info.next);
+    const prev = () => {
+        setPage(oldPage => `${parseInt(oldPage) - 1}`)
+
+    }
+    const next = () => {
+        setPage(oldPage => `${parseInt(oldPage) + 1}`)
+
+
+    }
 
     return (
         <div className={'galleryBox'}>
